@@ -1,0 +1,14 @@
+apiVersion: appscode.refat.kubebuilder.io/v1
+kind: Apiserver
+metadata:
+  labels:
+    app.kubernetes.io/name: apiserver
+    app.kubernetes.io/managed-by: kustomize
+  name: apiserver-sample
+  namespace: apiserver
+spec:
+  image: refat0/api-server:latest
+  replicas: 2
+  port: 8080
+  # TODO(user): Add fields here
+
