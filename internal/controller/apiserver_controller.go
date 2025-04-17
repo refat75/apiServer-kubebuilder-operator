@@ -92,7 +92,7 @@ func (r *ApiserverReconciler) Reconcile(ctx context.Context, req ctrl.Request) (
 		}
 		log.Info("Creating Deployment........")
 		err = r.Create(ctx, desiredDeployment)
-	} else if err == nil {
+	} else {
 		log.Info("Deployment Exist, Updating Deployment........")
 		patch := client.MergeFrom(existingDeployment.DeepCopy())
 		existingDeployment.Spec = desiredDeployment.Spec
@@ -100,8 +100,6 @@ func (r *ApiserverReconciler) Reconcile(ctx context.Context, req ctrl.Request) (
 		if err := r.Patch(ctx, &existingDeployment, patch); err != nil {
 			return ctrl.Result{}, err
 		}
-	} else {
-		return ctrl.Result{}, err
 	}
 
 	return ctrl.Result{}, nil
